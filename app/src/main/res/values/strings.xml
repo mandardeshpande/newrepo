@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">MultipleActivities</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="activities_spinner">
+        <item>Date Picker</item>
+        <item>Edit Text</item>
+        <item>List</item>
+    </string-array>
+    <string name="title_activity_datepicker">Datepicker</string>
+    <string name="title_activity_edit_field">Edit Text</string>
+    <string name="title_activity_list">List</string>
+
+    <string-array name="dessert_list_values">
+        <item>Cupcake</item>
+        <item>Donut</item>
+        <item>Gingerbread</item>
+        <item> Ice Cream</item>
+        <item> Jelly Bean</item>
+    </string-array>
+
+
+</resources>
