@@ -9,6 +9,7 @@
     <TextView
         android:layout_width="@dimen/abc_config_prefDialogWidth"
         android:layout_height="@dimen/abc_action_button_min_width_material"
+        android:background="@drawable/list_select_color"
         android:id="@+id/list" />
 
 </RelativeLayout>

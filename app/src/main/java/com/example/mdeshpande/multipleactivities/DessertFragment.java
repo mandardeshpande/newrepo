@@ -1,8 +1,10 @@
 package com.example.mdeshpande.multipleactivities;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
 
     private DessertListAdapter mAdapter;
     private ArrayList<DessertListItem> dessertListItemList;
+    private View currentSelectedView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +72,31 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DessertListItem item = this.dessertListItemList.get(position);
-        Toast.makeText(getActivity(), item.getItemTitle() + " Clicked!"
-                , Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), item.getItemTitle() + " Clicked!", Toast.LENGTH_SHORT).show();
+
+        if( (currentSelectedView != view ) && (currentSelectedView != null))
+        {
+            unhighlightCurrentRow(currentSelectedView);
+        }
+
+        currentSelectedView = view;
+        highlightCurrentRow(currentSelectedView);
+
+    }
+
+    private void unhighlightCurrentRow(View rowView) {
+        rowView.setBackgroundColor(Color.TRANSPARENT);
+        TextView textView = (TextView) rowView.findViewById(R.id.dessertName);
+        textView.setTextColor(getResources().getColor(R.color.black));
+
+    }
+
+    private void highlightCurrentRow(View rowView) {
+        rowView.setBackgroundColor(getResources().getColor(R.color.gray));
+        TextView textView = (TextView) rowView.findViewById(R.id.dessertName);
+        textView.setTextColor(getResources().getColor(R.color.red));
+
+
     }
 
 }
