@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MultipleActivities</string>
 
+    <string name="app_name">MultipleActivities</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -9,6 +10,7 @@
         <item>Edit Text</item>
         <item>List</item>
     </string-array>
+
     <string name="title_activity_datepicker">Datepicker</string>
     <string name="title_activity_edit_field">Edit Text</string>
     <string name="title_activity_list">List</string>
@@ -21,5 +23,6 @@
         <item> Jelly Bean</item>
     </string-array>
 
+    <string name="title_activity_dessert">DessertActivity</string>
 
 </resources>

@@ -56,12 +56,12 @@ public class MainActivity extends ActionBarActivity {
 
         //
 
-        FragmentManager fm = getFragmentManager();
+/*        FragmentManager fm = getFragmentManager();
 
         if (fm.findFragmentById(android.R.id.content) == null) {
-            DessertListFragment list = new DessertListFragment();
+            DessertFragment list = new DessertFragment();
             fm.beginTransaction().replace(android.R.id.content, list).commit();
-        }
+        }*/
     }
 
     public String read(String fileName){
@@ -136,7 +136,7 @@ public class MainActivity extends ActionBarActivity {
                      startActivity(editIntent);
                      break;
 
-            case 2 : Intent listIntent = new Intent(MainActivity.this, ListActivity.class);
+            case 2 : Intent listIntent = new Intent(MainActivity.this, DessertActivity.class);
                      MainActivity.this.startActivity(listIntent);
                      break;
         }
