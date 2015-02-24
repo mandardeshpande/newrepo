@@ -24,8 +24,11 @@
     </string-array>
 
     <string name="title_activity_dessert">DessertActivity</string>
+
     <color name="gray">#808080</color>
     <color name="red">#cc0000</color>
     <color name="black">#000000</color>
+
+    <string name="title_activity_fragment_for_main">fragment_for_main</string>
 
 </resources>

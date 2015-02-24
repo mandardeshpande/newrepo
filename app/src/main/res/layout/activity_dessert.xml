@@ -2,7 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
     android:layout_width="match_parent" android:layout_height="500dp"
     tools:context="com.example.mdeshpande.multipleactivities.DessertActivity"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame"
+    android:background="@color/background_floating_material_light">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/back"
+        android:layout_gravity="center_horizontal|bottom" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="253dp"
+        android:layout_gravity="center_horizontal|top"
+        android:id="@+id/testContainer"></LinearLayout>
 </FrameLayout>
 
 

@@ -18,12 +18,12 @@ import com.example.mdeshpande.multipleactivities.R;
 
 import java.util.List;
 
-public class DessertListAdapter extends ArrayAdapter
+public class DessertListAdapterMain extends ArrayAdapter
 {
     private Context context;
     private boolean useList = true;
 
-    public DessertListAdapter(Context context, List items) {
+    public DessertListAdapterMain(Context context, List items) {
         super(context, android.R.layout.simple_list_item_1, items);
         this.context = context;
     }
@@ -36,7 +36,6 @@ public class DessertListAdapter extends ArrayAdapter
         ViewHolder holder = null;
         DessertListItem item = (DessertListItem)getItem(position);
         View viewToUse = null;
-        View main = null;
 
         // This block exists to inflate the settings list item conditionally based on whether
         // we want to support a grid or list view.
@@ -45,14 +44,13 @@ public class DessertListAdapter extends ArrayAdapter
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             if(useList){
-                viewToUse = mInflater.inflate(R.layout.dessert_item_list, null);
-                main = mInflater.inflate(R.layout.activity_dessert, null);
+                viewToUse = mInflater.inflate(R.layout.custom_fragment_for_main_list, null);
             } else {
-                viewToUse = mInflater.inflate(R.layout.dessert_item_grid, null);
+                viewToUse = mInflater.inflate(R.layout.custom_fragment_for_main_grid, null);
             }
 
             holder = new ViewHolder();
-            holder.titleText = (TextView)viewToUse.findViewById(R.id.dessertName);
+            holder.titleText = (TextView)viewToUse.findViewById(R.id.dessertName_main);
             viewToUse.setTag(holder);
 
         } else {

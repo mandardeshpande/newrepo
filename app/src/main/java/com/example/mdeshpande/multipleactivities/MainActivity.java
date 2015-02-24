@@ -53,15 +53,6 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-
-        //
-
-/*        FragmentManager fm = getFragmentManager();
-
-        if (fm.findFragmentById(android.R.id.content) == null) {
-            DessertFragment list = new DessertFragment();
-            fm.beginTransaction().replace(android.R.id.content, list).commit();
-        }*/
     }
 
     public String read(String fileName){
@@ -112,8 +103,12 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case 1: editText.setText("");
                     break;
-            case 2: editText.setText("list");
-                    break;
+            case 2: FragmentManager fm = getFragmentManager();
+                    if (fm.findFragmentById(android.R.id.content) == null) {
+                        DessertFragmentMainFragment listMain = new DessertFragmentMainFragment();
+                        fm.beginTransaction().add(R.id.mainContainer,listMain)
+                                .commit();
+                    }
         }
     }
 
