@@ -55,11 +55,6 @@ public class DessertFragment extends ListFragment implements AbsListView.OnItemC
         dessertListItemList.add(new DessertListItem("JellyBean"));
         mAdapter = new DessertListAdapter(getActivity(), dessertListItemList);
 
-        int itemId = (int)getActivity().getIntent().getSerializableExtra(ITEM_ID);
-        DessertListItem item = this.dessertListItemList.get(itemId);
-
-        Log.d("test",item.getItemTitle());
-
     }
 
     @Override
@@ -68,7 +63,8 @@ public class DessertFragment extends ListFragment implements AbsListView.OnItemC
         View view = inflater.inflate(R.layout.fragment_dessert_list, container, false);
 
         Bundle bs = new Bundle();
-
+        CharSequence argsTest = getArguments().getCharSequence("ITEM");
+        Log.d("hhh",argsTest.toString());
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);

@@ -105,7 +105,10 @@ public class MainActivity extends ActionBarActivity {
                     break;
             case 2: FragmentManager fm = getFragmentManager();
                     if (fm.findFragmentById(android.R.id.content) == null) {
-                        DessertFragmentMainFragment listMain = new DessertFragmentMainFragment();
+                        DessertFragment listMain = new DessertFragment();
+                        Bundle bundleMain = new Bundle();
+                        bundleMain.putCharSequence("ITEM","TEST!");
+                        listMain.setArguments(bundleMain);
                         fm.beginTransaction().add(R.id.mainContainer,listMain)
                                 .commit();
                     }
