@@ -63,6 +63,11 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dessert_list, container, false);
 
+
+        Bundle bs = new Bundle();
+        CharSequence argsTest = getArguments().getCharSequence("ITEM");
+        Log.d("hhh",argsTest.toString());
+
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
