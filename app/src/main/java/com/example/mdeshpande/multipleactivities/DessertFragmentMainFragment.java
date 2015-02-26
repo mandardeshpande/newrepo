@@ -67,6 +67,8 @@ public class DessertFragmentMainFragment extends Fragment implements AbsListView
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+        mListView.setSelection(0);
+
 
         return view;
     }

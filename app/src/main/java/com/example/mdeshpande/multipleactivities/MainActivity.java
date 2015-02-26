@@ -17,7 +17,7 @@ import android.widget.AdapterView;
 
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements DessertFragment.onDessertClickHandler{
 
     private Spinner spinner;
     private Button selectActivity;
@@ -42,7 +42,6 @@ public class MainActivity extends ActionBarActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               Log.d("Item", String.valueOf(spinner.getSelectedItemId()));
                int itemId = (int)spinner.getSelectedItemId();
                 setSelectedDate(itemId);
             }
@@ -105,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
                     break;
             case 2: FragmentManager fm = getFragmentManager();
                     if (fm.findFragmentById(android.R.id.content) == null) {
-                        DessertFragmentMainFragment listMain = new DessertFragmentMainFragment();
+                        DessertFragment listMain = new DessertFragment();
                         fm.beginTransaction().add(R.id.mainContainer,listMain)
                                 .commit();
                     }
@@ -159,5 +158,22 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDessertSelectedHandler(int position) {
+        //Toast.makeText(activity,position+ " Clicked!", Toast.LENGTH_SHORT).show();
+
+        Log.d("ITEM",String.valueOf(position));
+
+        int selectedPosition = position;
+        Bundle bundle = new Bundle();
+        bundle.putInt("POS",selectedPosition);
+
+        DessertFragment frg = new DessertFragment();
+        frg.setArguments(bundle);
+
+        Log.d("SET",String.valueOf(selectedPosition));
+
     }
 }

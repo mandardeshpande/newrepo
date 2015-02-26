@@ -1,5 +1,6 @@
 package com.example.mdeshpande.multipleactivities;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -13,13 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Button;
+import android.widget.Toast;
 
 import Misc.DessertListItem;
 
 
-public class DessertActivity extends ActionBarActivity {
+public class DessertActivity extends Activity implements DessertFragment.onDessertClickHandler {
 
     private Button goBack;
+    Activity activity;
+    int selectedPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,19 +36,16 @@ public class DessertActivity extends ActionBarActivity {
                     .commit();
         }
 
+
+
         Button goback = (Button)findViewById(R.id.back);
         goback.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){ finish();}
+            public void onClick(View v){  finish();}
         });
 
-    }
 
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-        Log.d("back","backPressed");
-        finish();
+
     }
 
     @Override
@@ -70,6 +71,18 @@ public class DessertActivity extends ActionBarActivity {
     }
 
 
+    @Override
+    public void onDessertSelectedHandler(int position) {
+         //Toast.makeText(ac,position+ " Clicked!", Toast.LENGTH_SHORT).show();
+         selectedPosition = position;
+        Bundle bundle = new Bundle();
+        bundle.putInt("POS",selectedPosition);
+
+        DessertFragment frg = new DessertFragment();
+        frg.setArguments(bundle);
+
+        Log.d("SET",String.valueOf(selectedPosition));
 
 
+    }
 }

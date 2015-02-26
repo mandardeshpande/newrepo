@@ -34,7 +34,7 @@ import Misc.DessertListItem;
 
  * interface.
  */
-public class DessertFragment extends ListFragment implements AbsListView.OnItemClickListener {
+public class DessertFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     public static final String ITEM_ID ="ITEMID";
 
@@ -42,6 +42,7 @@ public class DessertFragment extends ListFragment implements AbsListView.OnItemC
     private DessertListAdapter mAdapter;
     private ArrayList<DessertListItem> dessertListItemList;
     private View currentSelectedView;
+    Activity activity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,19 +56,12 @@ public class DessertFragment extends ListFragment implements AbsListView.OnItemC
         dessertListItemList.add(new DessertListItem("JellyBean"));
         mAdapter = new DessertListAdapter(getActivity(), dessertListItemList);
 
-        int itemId = (int)getActivity().getIntent().getSerializableExtra(ITEM_ID);
-        DessertListItem item = this.dessertListItemList.get(itemId);
-
-        Log.d("test",item.getItemTitle());
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dessert_list, container, false);
-
-        Bundle bs = new Bundle();
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
@@ -79,6 +73,31 @@ public class DessertFragment extends ListFragment implements AbsListView.OnItemC
 
         return view;
     }
+
+    @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        this.activity = activity;
+
+
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+
+        try {
+            int pos = savedInstanceState.getInt("POS", -1);
+            Log.d("POSFET", String.valueOf(pos));
+        }
+        catch(Exception e){
+            e.getMessage();
+        }
+
+    }
+
 
 
     @Override
@@ -93,6 +112,15 @@ public class DessertFragment extends ListFragment implements AbsListView.OnItemC
 
         currentSelectedView = view;
         highlightCurrentRow(currentSelectedView);
+
+        try
+        {
+            ((onDessertClickHandler)activity).onDessertSelectedHandler(position);
+        }
+        catch(ClassCastException cce)
+        {
+            System.out.println("onDessertSelectedHandler must be inplement");
+        }
 
     }
 
@@ -109,6 +137,11 @@ public class DessertFragment extends ListFragment implements AbsListView.OnItemC
         textView.setTextColor(getResources().getColor(R.color.red));
 
 
+    }
+
+    public interface onDessertClickHandler
+    {
+        public void onDessertSelectedHandler(int position);
     }
 
 }
