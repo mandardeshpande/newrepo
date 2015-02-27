@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import Misc.DessertListItem;
@@ -29,17 +30,24 @@ public class DessertActivity extends Activity implements DessertFragment.onDesse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dessert);
 
+
+        selectedPosition = getIntent().getIntExtra("position", -1);
+        Log.d("POSACT",String.valueOf(selectedPosition));
+
+
         FragmentManager fm = getFragmentManager();
+
         if (fm.findFragmentById(android.R.id.content) == null) {
             DessertFragment list = new DessertFragment();
-            fm.beginTransaction().replace(R.id.testContainer,list)
+            list.setSelectedPosition(selectedPosition);
+            fm.beginTransaction().add(R.id.testContainer,list)
                     .commit();
         }
 
 
 
-        Button goback = (Button)findViewById(R.id.back);
-        goback.setOnClickListener(new View.OnClickListener(){
+        goBack = (Button)findViewById(R.id.back);
+        goBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){  finish();}
         });
@@ -73,16 +81,11 @@ public class DessertActivity extends Activity implements DessertFragment.onDesse
 
     @Override
     public void onDessertSelectedHandler(int position) {
-         //Toast.makeText(ac,position+ " Clicked!", Toast.LENGTH_SHORT).show();
-         selectedPosition = position;
-        Bundle bundle = new Bundle();
-        bundle.putInt("POS",selectedPosition);
 
-        DessertFragment frg = new DessertFragment();
-        frg.setArguments(bundle);
-
-        Log.d("SET",String.valueOf(selectedPosition));
-
+        DessertFragment desFragment = new DessertFragment();
+        desFragment.setSelectedPosition(position);
+        selectedPosition = position;
+        Log.d("POSDESSERT",String.valueOf(position));
 
     }
 }

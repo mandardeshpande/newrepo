@@ -13,6 +13,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
     private ArrayList<DessertListItem> dessertListItemList;
     private View currentSelectedView;
     Activity activity;
+    int selectedPosition;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,19 +64,15 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dessert_list, container, false);
-
-
-        Bundle bs = new Bundle();
-        CharSequence argsTest = getArguments().getCharSequence("ITEM");
-        Log.d("hhh",argsTest.toString());
-
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
 
+
+        mListView.setOnItemClickListener(this);
+        mListView.setSelection(selectedPosition);
 
         return view;
     }
@@ -88,20 +86,6 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
 
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-
-        try {
-            int pos = savedInstanceState.getInt("POS", -1);
-            Log.d("POSFET", String.valueOf(pos));
-        }
-        catch(Exception e){
-            e.getMessage();
-        }
-
-    }
 
 
 
@@ -109,14 +93,16 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DessertListItem item = this.dessertListItemList.get(position);
         Toast.makeText(getActivity(), item.getItemTitle() + " Clicked!", Toast.LENGTH_SHORT).show();
-
+        mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        mListView.setItemChecked(selectedPosition,true);
+        /*
         if( (currentSelectedView != view ) && (currentSelectedView != null))
         {
             unhighlightCurrentRow(currentSelectedView);
         }
 
         currentSelectedView = view;
-        highlightCurrentRow(currentSelectedView);
+        highlightCurrentRow(currentSelectedView);*/
 
         try
         {
@@ -124,7 +110,7 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
         }
         catch(ClassCastException cce)
         {
-            System.out.println("onDessertSelectedHandler must be inplement");
+            System.out.println("onDessertSelectedHandler must be implemented");
         }
 
     }
@@ -136,7 +122,7 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
 
     }
 
-    private void highlightCurrentRow(View rowView) {
+    public void highlightCurrentRow(View rowView) {
         rowView.setBackgroundColor(getResources().getColor(R.color.gray));
         TextView textView = (TextView) rowView.findViewById(R.id.dessertName);
         textView.setTextColor(getResources().getColor(R.color.red));
@@ -147,6 +133,16 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
     public interface onDessertClickHandler
     {
         public void onDessertSelectedHandler(int position);
+    }
+
+    public void setSelectedPosition(int position)
+    {
+        this.selectedPosition = position;
+    }
+
+    public int getSelectedPosition()
+    {
+        return this.selectedPosition;
     }
 
 }

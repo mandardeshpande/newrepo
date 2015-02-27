@@ -24,7 +24,7 @@ public class DessertListAdapter extends ArrayAdapter
     private boolean useList = true;
 
     public DessertListAdapter(Context context, List items) {
-        super(context, android.R.layout.simple_list_item_1, items);
+        super(context, android.R.layout.simple_list_item_activated_1, items);
         this.context = context;
     }
 
@@ -36,7 +36,6 @@ public class DessertListAdapter extends ArrayAdapter
         ViewHolder holder = null;
         DessertListItem item = (DessertListItem)getItem(position);
         View viewToUse = null;
-        View main = null;
 
         // This block exists to inflate the settings list item conditionally based on whether
         // we want to support a grid or list view.
@@ -46,7 +45,7 @@ public class DessertListAdapter extends ArrayAdapter
         if (convertView == null) {
             if(useList){
                 viewToUse = mInflater.inflate(R.layout.dessert_item_list, null);
-                main = mInflater.inflate(R.layout.activity_dessert, null);
+
             } else {
                 viewToUse = mInflater.inflate(R.layout.dessert_item_grid, null);
             }

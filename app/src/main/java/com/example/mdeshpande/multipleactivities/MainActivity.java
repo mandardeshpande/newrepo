@@ -22,6 +22,8 @@ public class MainActivity extends ActionBarActivity implements DessertFragment.o
     private Spinner spinner;
     private Button selectActivity;
     private EditText editText;
+    int selectedPosition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,12 +107,7 @@ public class MainActivity extends ActionBarActivity implements DessertFragment.o
             case 2: FragmentManager fm = getFragmentManager();
                     if (fm.findFragmentById(android.R.id.content) == null) {
                         DessertFragment listMain = new DessertFragment();
-
-                        Bundle bundleMain = new Bundle();
-                        bundleMain.putCharSequence("ITEM","TEST!");
-                        listMain.setArguments(bundleMain);
-
-                        fm.beginTransaction().replace(R.id.mainContainer,listMain)
+                        fm.beginTransaction().add(R.id.mainContainer,listMain)
                                 .commit();
                     }
         }
@@ -136,7 +133,8 @@ public class MainActivity extends ActionBarActivity implements DessertFragment.o
                      break;
 
             case 2 : Intent listIntent = new Intent(MainActivity.this, DessertActivity.class);
-                     MainActivity.this.startActivity(listIntent);
+                     listIntent.putExtra("position", selectedPosition);
+                     startActivity(listIntent);
                      break;
         }
 
@@ -167,18 +165,12 @@ public class MainActivity extends ActionBarActivity implements DessertFragment.o
 
     @Override
     public void onDessertSelectedHandler(int position) {
-        //Toast.makeText(activity,position+ " Clicked!", Toast.LENGTH_SHORT).show();
 
-        Log.d("ITEM",String.valueOf(position));
+        DessertFragment desFragmain = new DessertFragment();
+        desFragmain.setSelectedPosition(position);
+        selectedPosition = position;
+        Log.d("SetItemPOs",String.valueOf(position));
 
-        int selectedPosition = position;
-        Bundle bundle = new Bundle();
-        bundle.putInt("POS",selectedPosition);
-
-        DessertFragment frg = new DessertFragment();
-        frg.setArguments(bundle);
-
-        Log.d("SET",String.valueOf(selectedPosition));
 
     }
 }
