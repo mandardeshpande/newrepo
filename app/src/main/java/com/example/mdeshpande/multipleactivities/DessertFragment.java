@@ -68,9 +68,7 @@ public class DessertFragment extends Fragment implements AbsListView.OnItemClick
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
-        // Set OnItemClickListener so we can be notified on item clicks
-
-
+     
         mListView.setOnItemClickListener(this);
         mListView.setSelection(selectedPosition);
 
