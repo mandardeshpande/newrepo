@@ -32,7 +32,7 @@ public class DessertActivity extends Activity implements DessertFragment.onDesse
         FragmentManager fm = getFragmentManager();
         if (fm.findFragmentById(android.R.id.content) == null) {
             DessertFragment list = new DessertFragment();
-            fm.beginTransaction().add(R.id.testContainer,list)
+            fm.beginTransaction().replace(R.id.testContainer,list)
                     .commit();
         }
 

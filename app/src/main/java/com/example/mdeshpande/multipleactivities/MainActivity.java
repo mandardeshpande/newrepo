@@ -110,7 +110,7 @@ public class MainActivity extends ActionBarActivity implements DessertFragment.o
                         bundleMain.putCharSequence("ITEM","TEST!");
                         listMain.setArguments(bundleMain);
 
-                        fm.beginTransaction().add(R.id.mainContainer,listMain)
+                        fm.beginTransaction().replace(R.id.mainContainer,listMain)
                                 .commit();
                     }
         }
