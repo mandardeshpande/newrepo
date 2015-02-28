@@ -23,16 +23,19 @@ public class DateReadWrite
     {
         String ret = "";
 
-        try {
+        try
+        {
             InputStream inputStream = context.openFileInput(fileName);
 
-            if ( inputStream != null ) {
+            if ( inputStream != null )
+            {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                while ( (receiveString = bufferedReader.readLine()) != null )
+                {
                     stringBuilder.append(receiveString);
                 }
 
@@ -40,9 +43,11 @@ public class DateReadWrite
                 ret = stringBuilder.toString();
             }
         }
-        catch (FileNotFoundException e) {
+        catch (FileNotFoundException e)
+        {
             Log.e("File", "File not found: " + e.toString());
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             Log.e("FIle", "Can not read file: " + e.toString());
         }
 
@@ -51,13 +56,15 @@ public class DateReadWrite
 
     public int saveData(String date,String fileName,Context context)
     {
-        try {
+        try
+        {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));
             outputStreamWriter.write(date);
             outputStreamWriter.close();
             Toast.makeText(context, "Date saved successfully!",Toast.LENGTH_SHORT).show();
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             Log.e("WROTTE", "File write failed: " + e.toString());
         }
 
