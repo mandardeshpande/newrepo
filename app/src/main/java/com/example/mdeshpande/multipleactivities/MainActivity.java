@@ -2,7 +2,7 @@ package com.example.mdeshpande.multipleactivities;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,10 +12,9 @@ import android.widget.Spinner;
 import android.widget.Button;
 import android.widget.ArrayAdapter;
 import android.content.Intent;
-import java.io.*;
-import android.util.Log;
 import android.widget.AdapterView;
 
+import Misc.DateReadWrite;
 import Misc.DessertFragment;
 
 
@@ -25,11 +24,10 @@ public class MainActivity extends Activity implements DessertFragment.onDessertC
     private Button selectActivity;
     private EditText editText;
     int selectedPosition;
-    View selectView;
-
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -44,43 +42,27 @@ public class MainActivity extends Activity implements DessertFragment.onDessertC
         });
 
         spinner =  (Spinner)findViewById(R.id.activities_spinner);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
                int itemId = (int)spinner.getSelectedItemId();
-                setSelectedDate(itemId);
+                setSelectedActivity(itemId);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> parent)
+            {
 
             }
         });
 
     }
 
-    public String read(String fileName){
 
-        String savedDate = "";
-        try{
-            FileInputStream fin = openFileInput(fileName);
-            int c;
-
-            while( (c = fin.read()) != -1){
-                savedDate = savedDate + Character.toString((char)c);
-            }
-
-
-
-        }catch(Exception e){
-
-        }
-
-        return savedDate;
-    }
-
-    public void addActivitiesToSpinner() {
-
+    public void addActivitiesToSpinner()
+    {
         spinner = (Spinner) findViewById(R.id.activities_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.activities_spinner, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -91,28 +73,31 @@ public class MainActivity extends Activity implements DessertFragment.onDessertC
     public void onResume()
     {
         super.onResume();
-        setSelectedDate(0);
+
+        setSelectedActivity(spinner.getSelectedItemPosition());
 
     }
 
-    public void setSelectedDate(int itemId)
+    public void setSelectedActivity(int itemId)
     {
 
+        DateReadWrite drwObj = new DateReadWrite();
         editText = (EditText)findViewById(R.id.editText);
         switch (itemId)
         {
-            case 0:
-                String savedDate = read("date.txt");
-                editText.setText(savedDate);
-                break;
-            case 1: editText.setText("");
-                    break;
-            case 2: FragmentManager fm = getFragmentManager();
-                if (fm.findFragmentById(android.R.id.content) == null) {
-                    DessertFragment listMain = new DessertFragment();
-                    fm.beginTransaction().add(R.id.fragmentDessert,listMain)
-                            .commit();
-                }
+            case 0:     String savedDate = drwObj.readDateFromFile("date.txt", getBaseContext());
+                        editText.setText(savedDate);
+                        break;
+
+            case 1:     editText.setText("");
+                        break;
+
+            case 2:     FragmentManager fm = getFragmentManager();
+                         if (fm.findFragmentById(android.R.id.content) == null)
+                         {
+                             DessertFragment listMain = new DessertFragment();
+                             fm.beginTransaction().add(R.id.fragmentDessert, listMain).commit();
+                         }
         }
     }
 
@@ -126,11 +111,9 @@ public class MainActivity extends Activity implements DessertFragment.onDessertC
         {
             case 0 : Intent datePickerintent = new Intent(MainActivity.this, DatepickerActivity.class);
                      MainActivity.this.startActivity(datePickerintent);
-                     //setSelectedDate();
                      break;
 
             case 1 : Intent editIntent = new Intent(MainActivity.this, EditFieldActivity.class);
-                     //editText.setText("");
                      editIntent.putExtra("editText",editText.getText().toString());
                      startActivity(editIntent);
                      break;
@@ -145,21 +128,24 @@ public class MainActivity extends Activity implements DessertFragment.onDessertC
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
         }
 
@@ -168,11 +154,10 @@ public class MainActivity extends Activity implements DessertFragment.onDessertC
 
 
     @Override
-    public void onDessertSelectedHandler(int position) {
-
-        DessertFragment desFragmain = new DessertFragment();
-        desFragmain.setSelectedPosition(position);
+    public void onDessertSelectedHandler(int position)
+    {
+        DessertFragment dessertFragmentObj = new DessertFragment();
+        dessertFragmentObj.setSelectedPosition(position);
         selectedPosition = position;
-        Log.d("SetItemPOs",String.valueOf(position));
     }
 }

@@ -31,7 +31,8 @@
             android:layout_above="@+id/select"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/abc_action_bar_icon_vertical_padding_material" />
+            android:layout_marginBottom="@dimen/abc_action_bar_icon_vertical_padding_material"
+            android:hint="Enter some text here"/>
 
         <Spinner
             android:id="@+id/activities_spinner"

@@ -33,6 +33,7 @@
         android:width="500dp"
         android:editable="true"
         android:layout_below="@+id/textbox1"
+        android:hint="Enter some text here"
          />
 
 

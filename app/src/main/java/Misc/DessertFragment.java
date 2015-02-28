@@ -17,7 +17,8 @@ import android.widget.ListView;
 
 import com.example.mdeshpande.multipleactivities.R;
 
-public class DessertFragment extends Fragment implements  AbsListView.OnItemClickListener   {
+public class DessertFragment extends Fragment implements  AbsListView.OnItemClickListener
+{
 
     private ListView dessertList;
     int selectedItemPosition;
@@ -26,12 +27,8 @@ public class DessertFragment extends Fragment implements  AbsListView.OnItemClic
 
     public static DessertFragment newInstance() {
         DessertFragment fragment = new DessertFragment();
-
         return fragment;
     }
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -93,8 +90,5 @@ public class DessertFragment extends Fragment implements  AbsListView.OnItemClic
     {
         return this.selectedItemPosition;
     }
-
-
-
 
 }
