@@ -12,7 +12,7 @@ import android.widget.Button;
 import Misc.DessertFragment;
 
 
-public class DessertActivity extends Activity {
+public class DessertActivity extends Activity implements DessertFragment.onDessertClickHandler {
 
     private Button goBack;
     Activity activity;
@@ -29,8 +29,9 @@ public class DessertActivity extends Activity {
 
         FragmentManager fm = getFragmentManager();
         if (fm.findFragmentById(android.R.id.content) == null) {
-            DessertFragment listMain = new DessertFragment();
-            fm.beginTransaction().add(R.id.fragmentHolder,listMain)
+            DessertFragment list = new DessertFragment();
+            list.setSelectedPosition(selectedPosition);
+            fm.beginTransaction().add(R.id.fragmentHolder,list)
                     .commit();
         }
 
@@ -65,6 +66,15 @@ public class DessertActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onDessertSelectedHandler(int position) {
+
+        DessertFragment desFragment = new DessertFragment();
+        desFragment.setSelectedPosition(position);
+        selectedPosition = position;
+        Log.d("POSDESSERT",String.valueOf(position));
+
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.mdeshpande.multipleactivities;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import android.widget.AdapterView;
 import Misc.DessertFragment;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity implements DessertFragment.onDessertClickHandler {
 
     private Spinner spinner;
     private Button selectActivity;
@@ -166,4 +167,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    @Override
+    public void onDessertSelectedHandler(int position) {
+
+        DessertFragment desFragmain = new DessertFragment();
+        desFragmain.setSelectedPosition(position);
+        selectedPosition = position;
+        Log.d("SetItemPOs",String.valueOf(position));
+    }
 }

@@ -1,6 +1,8 @@
 package Misc;
 
 import android.app.Activity;
+import android.app.ListFragment;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -19,6 +21,7 @@ public class DessertFragment extends Fragment implements  AbsListView.OnItemClic
 
     private ListView dessertList;
     int selectedItemPosition;
+    Activity activity;
 
 
     public static DessertFragment newInstance() {
@@ -31,32 +34,66 @@ public class DessertFragment extends Fragment implements  AbsListView.OnItemClic
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View viewList = (View)inflater.inflate(R.layout.fragment_dessert,container,false);
 
         dessertList = (ListView)viewList.findViewById(R.id.dessertList);
         String[] dessertListArray = getActivity().getResources().getStringArray(R.array.dessert_list_values);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, dessertListArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_checked, dessertListArray);
         dessertList.setAdapter(adapter);
         dessertList.setOnItemClickListener(this);
-
-        dessertList.requestFocus();
-        dessertList.setSelection(3);
-
-        //System.out.println("   OBJ"+dessertList.);
 
         return viewList;
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstance)
+    {
+        super.onActivityCreated(savedInstance);
+        System.out.println(getSelectedPosition());
+        dessertList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        dessertList.setItemChecked(selectedItemPosition,true);
+    }
+
+    @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        this.activity = activity;
+
+
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        selectedItemPosition = position;
-        Log.d("POSITION", String.valueOf(position));
+        try
+        {
+            ((onDessertClickHandler)activity).onDessertSelectedHandler(position);
+        }
+        catch(ClassCastException cce)
+        {
+            System.out.println("onDessertSelectedHandler must be implemented");
+        }
     }
+
+    public interface onDessertClickHandler
+    {
+        public void onDessertSelectedHandler(int position);
+    }
+
+    public void setSelectedPosition(int position)
+    {
+        this.selectedItemPosition = position;
+    }
+
+    public int getSelectedPosition()
+    {
+        return this.selectedItemPosition;
+    }
+
 
 
 
