@@ -11,6 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,15 +43,15 @@
             android:layout_marginBottom="@dimen/abc_action_button_min_width_material" />
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/activities_spinner"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_above="@+id/editText"
-            android:layout_below="@+id/activities_spinner"
-            android:id="@+id/mainContainer"
-            android:focusable="false"></LinearLayout>
+            android:id="@+id/fragmentDessert"></LinearLayout>
+
+
     </RelativeLayout>
 
 </RelativeLayout>

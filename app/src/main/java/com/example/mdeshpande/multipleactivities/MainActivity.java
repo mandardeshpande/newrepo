@@ -15,14 +15,16 @@ import java.io.*;
 import android.util.Log;
 import android.widget.AdapterView;
 
+import Misc.DessertFragment;
 
 
-public class MainActivity extends ActionBarActivity implements DessertFragment.onDessertClickHandler{
+public class MainActivity extends ActionBarActivity {
 
     private Spinner spinner;
     private Button selectActivity;
     private EditText editText;
     int selectedPosition;
+    View selectView;
 
 
     @Override
@@ -105,11 +107,11 @@ public class MainActivity extends ActionBarActivity implements DessertFragment.o
             case 1: editText.setText("");
                     break;
             case 2: FragmentManager fm = getFragmentManager();
-                    if (fm.findFragmentById(android.R.id.content) == null) {
-                        DessertFragment listMain = new DessertFragment();
-                        fm.beginTransaction().add(R.id.mainContainer,listMain)
-                                .commit();
-                    }
+                if (fm.findFragmentById(android.R.id.content) == null) {
+                    DessertFragment listMain = new DessertFragment();
+                    fm.beginTransaction().add(R.id.fragmentDessert,listMain)
+                            .commit();
+                }
         }
     }
 
@@ -163,14 +165,5 @@ public class MainActivity extends ActionBarActivity implements DessertFragment.o
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onDessertSelectedHandler(int position) {
 
-        DessertFragment desFragmain = new DessertFragment();
-        desFragmain.setSelectedPosition(position);
-        selectedPosition = position;
-        Log.d("SetItemPOs",String.valueOf(position));
-
-
-    }
 }

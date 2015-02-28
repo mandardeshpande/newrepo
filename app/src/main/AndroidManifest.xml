@@ -28,10 +28,6 @@
             android:name=".DessertActivity"
             android:label="@string/title_activity_dessert" >
         </activity>
-        <activity
-            android:name=".fragment_for_main"
-            android:label="@string/title_activity_fragment_for_main" >
-        </activity>
     </application>
 
 </manifest>
