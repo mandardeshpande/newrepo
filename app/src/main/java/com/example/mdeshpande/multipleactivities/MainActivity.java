@@ -1,9 +1,9 @@
 package com.example.mdeshpande.multipleactivities;
 
-import android.app.Activity;
+import android.app.ActionBar;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +18,7 @@ import Misc.DateReadWrite;
 import Misc.DessertFragment;
 
 
-public class MainActivity extends Activity implements DessertFragment.onDessertClickHandler {
+public class MainActivity extends ActionBarActivity implements DessertFragment.onDessertClickHandler {
 
     private Spinner spinner;
     private Button selectActivity;
@@ -31,6 +31,7 @@ public class MainActivity extends Activity implements DessertFragment.onDessertC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        
         addActivitiesToSpinner();
 
         selectActivity = (Button)findViewById(R.id.select);

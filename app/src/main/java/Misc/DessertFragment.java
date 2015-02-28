@@ -38,7 +38,7 @@ public class DessertFragment extends Fragment implements  AbsListView.OnItemClic
         dessertList = (ListView)viewList.findViewById(R.id.dessertList);
         String[] dessertListArray = getActivity().getResources().getStringArray(R.array.dessert_list_values);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_checked, dessertListArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, dessertListArray);
         dessertList.setAdapter(adapter);
         dessertList.setOnItemClickListener(this);
 
